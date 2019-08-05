@@ -1,2 +1,2 @@
-# Plugin AcessoBD
-Trata-se de um plugin do tipo relatório, o qual exibe a lista de categorias cadastradas no Moodle.
+# Plugin UsefulQueries
+Trata-se de um plugin do tipo relatório, o qual exibe uma lista de consultas úteis para um administrador da plataforma Moodle.

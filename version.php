@@ -22,6 +22,6 @@
  */
 defined('MOODLE_INTERNAL') || die;
 
-$plugin->version   = 2019080500;         // The current plugin version (Date: YYYYMMDDXX)
+$plugin->version   = 2019080502;         // The current plugin version (Date: YYYYMMDDXX)
 $plugin->requires  = 2015051100;         // Requires this Moodle version (see https://docs.moodle.org/dev/Releases)
 $plugin->component = 'report_usefulqueries';  // Full name of the plugin

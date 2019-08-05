@@ -14,23 +14,12 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 /**
- * Report main page
+ * Strings for component, language 'en'
  *
  * @package    report
  * @copyright  2019 Paulo Jr
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-require __DIR__ . '/../../config.php';
-require_once $CFG->libdir . '/adminlib.php';
-
-admin_externalpage_setup('reportusefulqueries', '', null, '', array('pagelayout' => 'report'));
-
-echo $OUTPUT->header();
-echo $OUTPUT->heading(get_string('pluginname', 'report_usefulqueries'));
-
-echo html_writer::link(
-    $CFG->wwwroot . '/report/usefulqueries/courseswoprofessors.php', 
-    get_string('link_courseswoprofessors', 'report_usefulqueries')
-);
-
-echo $OUTPUT->footer();
+$string['pluginname'] = 'Useful queries';
+$string['col_coursename'] = 'Course name';
+$string['link_courseswoprofessors'] = 'Courses without professors';

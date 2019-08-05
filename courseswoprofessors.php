@@ -28,9 +28,20 @@ admin_externalpage_setup('reportusefulqueries', '', null, '', array('pagelayout'
 echo $OUTPUT->header();
 echo $OUTPUT->heading(get_string('pluginname', 'report_usefulqueries'));
 
-echo html_writer::link(
-    $CFG->wwwroot . '/report/usefulqueries/courseswoprofessors.php', 
-    get_string('link_courseswoprofessors', 'report_usefulqueries')
+$courses = $DB->get_records_sql(
+    'SELECT id, fullname FROM {course} WHERE id NOT IN (SELECT DISTINCT e.instanceid FROM {role_assignments} rs INNER JOIN {context} e ON rs.contextid= e.id WHERE e.contextlevel=50 AND rs.roleid=3)'
 );
+
+$table = new html_table();
+$table->size = array('85%', '15%');
+$table->head = array(
+    get_string('col_coursename', 'report_usefulqueries')
+);
+
+foreach ($courses as $course) {
+    $table->data[] = array($course->fullname);
+}
+
+echo html_writer::table($table);
 
 echo $OUTPUT->footer();

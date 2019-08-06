@@ -22,26 +22,36 @@
  */
 require __DIR__ . '/../../config.php';
 require_once $CFG->libdir . '/adminlib.php';
+require_once __DIR__ . '/category.php';
 
 admin_externalpage_setup('reportusefulqueries', '', null, '', array('pagelayout' => 'report'));
 
 echo $OUTPUT->header();
 echo $OUTPUT->heading(get_string('pluginname', 'report_usefulqueries'));
 
-$courses = $DB->get_records_sql(
-    'SELECT id, fullname FROM {course} WHERE id NOT IN (SELECT DISTINCT e.instanceid FROM {role_assignments} rs INNER JOIN {context} e ON rs.contextid= e.id WHERE e.contextlevel=50 AND rs.roleid=3)'
-);
+$mform = new category_form();
+$mform->display();
 
-$table = new html_table();
-$table->size = array('85%', '15%');
-$table->head = array(
+if ($fromform = $mform->get_data()) {
+  $courses = $DB->get_records_sql(
+    'SELECT id, fullname FROM {course} WHERE category = :cat AND id NOT IN (SELECT DISTINCT e.instanceid FROM {role_assignments} rs INNER JOIN {context} e ON rs.contextid= e.id WHERE e.contextlevel=50 AND rs.roleid=3)',
+    array('cat' => $mform->get_data()->category)
+  );
+
+  $table = new html_table();
+  $table->size = array('85%', '15%');
+  $table->head = array(
     get_string('col_coursename', 'report_usefulqueries')
-);
+  );
 
-foreach ($courses as $course) {
+  foreach ($courses as $course) {
     $table->data[] = array($course->fullname);
+  }
+
+  echo html_writer::table($table);
 }
 
-echo html_writer::table($table);
+
+
 
 echo $OUTPUT->footer();

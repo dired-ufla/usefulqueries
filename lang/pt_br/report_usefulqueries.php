@@ -22,4 +22,5 @@
  */
 $string['pluginname'] = 'Consultas úteis';
 $string['col_coursename'] = 'Course name';
+$string['label_choosecat'] = 'Por favor, selecione uma categoria:';
 $string['link_courseswoprofessors'] = 'Cursos sem professores';

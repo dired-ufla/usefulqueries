@@ -14,13 +14,27 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 /**
- * Strings for component, language 'en'
+ * Form page
  *
  * @package    report
  * @copyright  2019 Paulo Jr
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-$string['pluginname'] = 'Useful queries';
-$string['col_coursename'] = 'Course name';
-$string['label_choosecat'] = 'Please choose a category:';
-$string['link_courseswoprofessors'] = 'Courses without professors';
+require_once $CFG->libdir . '/formslib.php';
+
+class category_form extends moodleform {
+    public function definition() {
+        global $DB;
+
+        $mform = $this->_form; // Don't forget the underscore! 
+        $mform->disable_form_change_checker();
+
+        $categories = $DB->get_records_menu('course_categories', null, 'name');
+        
+        //array_unshift($categories , $first_item);
+
+        $mform->addElement('select', 'category', get_string('label_choosecat', 'report_usefulqueries'), 
+        $categories, array('onchange' => 'javascript:submit();'));
+    }
+}
+

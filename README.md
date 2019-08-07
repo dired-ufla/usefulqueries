@@ -1,8 +1,8 @@
 # Plugin UsefulQueries
-This plugin has two reports that give information to the admin detects inactive courses at Moodle platform.
+This report plugin allows administrators to execute useful queries in Moodle database, in an easy way. 
 
-The first one lists all courses without enrolled professors.
-The second one lists all courses without enrolled students.
+## Releases
 
-Releases
-* v1.0: initial version
+* 1.0: in this version, the following queries are available:
+    - List all courses without enrolled professors.
+    - List all courses without enrolled students.

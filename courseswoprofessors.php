@@ -27,7 +27,13 @@ require_once __DIR__ . '/category.php';
 admin_externalpage_setup('reportusefulqueries', '', null, '', array('pagelayout' => 'report'));
 
 echo $OUTPUT->header();
-echo $OUTPUT->heading(get_string('pluginname', 'report_usefulqueries'));
+echo $OUTPUT->heading(
+  get_string('courseswoprofessors', 'report_usefulqueries') . ' - ' .
+  html_writer::link(
+    $CFG->wwwroot . '/report/usefulqueries/index.php', 
+    get_string('back', 'report_usefulqueries')
+  )
+);
 
 $mform = new category_form();
 $mform->display();
@@ -41,17 +47,19 @@ if ($fromform = $mform->get_data()) {
   $table = new html_table();
   $table->size = array('85%', '15%');
   $table->head = array(
-    get_string('col_coursename', 'report_usefulqueries')
+    get_string('coursename', 'report_usefulqueries')
   );
 
   foreach ($courses as $course) {
-    $table->data[] = array($course->fullname);
+    $table->data[] = array(
+      html_writer::link(
+        $CFG->wwwroot . '/course/view.php?id=' . $course->id, 
+        $course->fullname
+      )
+    );
   }
 
   echo html_writer::table($table);
 }
-
-
-
 
 echo $OUTPUT->footer();

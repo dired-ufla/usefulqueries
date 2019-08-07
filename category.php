@@ -27,14 +27,12 @@ class category_form extends moodleform {
         global $DB;
 
         $mform = $this->_form; // Don't forget the underscore! 
-        $mform->disable_form_change_checker();
+        //$mform->disable_form_change_checker();
 
         $categories = $DB->get_records_menu('course_categories', null, 'name');
         
-        //array_unshift($categories , $first_item);
-
-        $mform->addElement('select', 'category', get_string('label_choosecat', 'report_usefulqueries'), 
-        $categories, array('onchange' => 'javascript:submit();'));
+        $mform->addElement('select', 'category', get_string('choosecat', 'report_usefulqueries'), $categories);
+        $this->add_action_buttons(false, get_string('refresh', 'report_usefulqueries'));
     }
 }
 

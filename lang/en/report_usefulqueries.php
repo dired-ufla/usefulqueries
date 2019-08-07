@@ -21,6 +21,9 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 $string['pluginname'] = 'Useful queries';
-$string['col_coursename'] = 'Course name';
-$string['label_choosecat'] = 'Please choose a category:';
-$string['link_courseswoprofessors'] = 'Courses without professors';
+$string['coursename'] = 'Courses name';
+$string['choosecat'] = 'Please choose a category:';
+$string['courseswoprofessors'] = 'Courses without enrolled professors';
+$string['courseswostudents'] = 'Courses without enrolled students';
+$string['refresh'] = 'Refresh';
+$string['back'] = 'Back';

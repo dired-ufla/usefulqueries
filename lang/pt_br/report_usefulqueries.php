@@ -21,6 +21,9 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 $string['pluginname'] = 'Consultas úteis';
-$string['col_coursename'] = 'Course name';
-$string['label_choosecat'] = 'Por favor, selecione uma categoria:';
-$string['link_courseswoprofessors'] = 'Cursos sem professores';
+$string['coursename'] = 'Nome dos cursos';
+$string['choosecat'] = 'Por favor, seleciona uma categoria:';
+$string['courseswoprofessors'] = 'Cursos sem professores cadastrados';
+$string['courseswostudents'] = 'Cursos sem estudantes cadastrados';
+$string['refresh'] = 'Atualizar';
+$string['back'] = 'Voltar';

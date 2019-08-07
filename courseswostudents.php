@@ -22,27 +22,44 @@
  */
 require __DIR__ . '/../../config.php';
 require_once $CFG->libdir . '/adminlib.php';
+require_once __DIR__ . '/category.php';
 
 admin_externalpage_setup('reportusefulqueries', '', null, '', array('pagelayout' => 'report'));
 
 echo $OUTPUT->header();
-echo $OUTPUT->heading(get_string('pluginname', 'report_usefulqueries'));
-
-$table = new html_table();
-$table->size = array('100%');
-$table->data[] = array(
+echo $OUTPUT->heading(
+    get_string('courseswostudents', 'report_usefulqueries') . ' - ' .
     html_writer::link(
-        $CFG->wwwroot . '/report/usefulqueries/courseswoprofessors.php', 
-        get_string('courseswoprofessors', 'report_usefulqueries')
-    )
-);
-$table->data[] = array(
-    html_writer::link(
-        $CFG->wwwroot . '/report/usefulqueries/courseswostudents.php', 
-        get_string('courseswostudents', 'report_usefulqueries')
+      $CFG->wwwroot . '/report/usefulqueries/index.php', 
+      get_string('back', 'report_usefulqueries')
     )
 );
 
-echo html_writer::table($table);
+$mform = new category_form();
+$mform->display();
+
+if ($fromform = $mform->get_data()) {
+  $courses = $DB->get_records_sql(
+    'SELECT id, fullname FROM {course} WHERE category = :cat AND id NOT IN (SELECT DISTINCT e.instanceid FROM {role_assignments} rs INNER JOIN {context} e ON rs.contextid= e.id WHERE e.contextlevel=50 AND rs.roleid=5)',
+    array('cat' => $mform->get_data()->category)
+  );
+
+  $table = new html_table();
+  $table->size = array('85%', '15%');
+  $table->head = array(
+    get_string('coursename', 'report_usefulqueries')
+  );
+
+  foreach ($courses as $course) {
+    $table->data[] = array(
+        html_writer::link(
+            $CFG->wwwroot . '/course/view.php?id=' . $course->id, 
+            $course->fullname
+        )        
+    );
+  }
+
+  echo html_writer::table($table);
+}
 
 echo $OUTPUT->footer();

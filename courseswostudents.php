@@ -40,7 +40,7 @@ $mform->display();
 
 if ($fromform = $mform->get_data()) {
   $courses = $DB->get_records_sql(
-    'SELECT id, fullname FROM {course} WHERE category = :cat AND id NOT IN (SELECT DISTINCT e.instanceid FROM {role_assignments} rs INNER JOIN {context} e ON rs.contextid= e.id WHERE e.contextlevel=50 AND rs.roleid=5)',
+    'SELECT id, fullname FROM {course} WHERE visible=1 AND category = :cat AND id NOT IN (SELECT DISTINCT e.instanceid FROM {role_assignments} rs INNER JOIN {context} e ON rs.contextid= e.id WHERE e.contextlevel=50 AND rs.roleid=5)',
     array('cat' => $mform->get_data()->category)
   );
 
